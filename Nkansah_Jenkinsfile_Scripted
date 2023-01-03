@@ -20,14 +20,14 @@ node{
         
     //Upload Artifact into Artifact Repo Nexus
     stage('UploadBuildArtifact'){
-        nexusArtifactUploader artifacts: [[artifactId: 'maven-web-application', classifier: '', file: 'target/maven-web-application.war', type: 'war']], credentialsId: 'Nexus-Credentials', groupId: 'incom.mt', nexusUrl: '54.85.181.86:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'facebook-snapshot', version: '1.0-SNAPSHOT'
+        nexusArtifactUploader artifacts: [[artifactId: 'maven-web-application', classifier: '', file: 'target/maven-web-application.war', type: 'war']], credentialsId: 'Nexus-Credentials', groupId: 'incom.mt', nexusUrl: '18.212.183.199:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'facebook-snapshot', version: '1.0-SNAPSHOT'
     }
     }
     
     //Deploy Application into Tomcat server
     stage('DeployAppIntoTomcat'){
      sshagent(['ssh-Agent-Tomcat-Credentials']) {
-    sh 'scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@54.91.183.59:/opt/tomcat9/webapps'
+    sh 'scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@54.172.135.195:/opt/tomcat9/webapps'
         }
     }
 }
